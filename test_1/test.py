@@ -1,7 +1,7 @@
 import subprocess
 
 def test_1(user_codes_dir, test_files_dir):
-    command = f'gcc -o {test_files_dir}/test_1/test {user_codes_dir}/calculator.c {test_files_dir}/test_1/0-test_calculator.c; {test_files_dir}/test_1/test'
+    command = f'gcc "{user_codes_dir}/calculator.c" "{test_files_dir}/test_1/0-test_calculator.c" -o "{test_files_dir}/test_1/test" && "{test_files_dir}/test_1/test"'
     result = subprocess.run(
         command, shell=True, capture_output=True, text=True
     )
