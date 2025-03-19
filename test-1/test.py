@@ -1,7 +1,7 @@
 import subprocess
 
-def test_1(user_codes_dir, test_files_dir):
-    command = f'gcc "{user_codes_dir}/calculator.c" "{test_files_dir}/test_1/0-test_calculator.c" -o "{test_files_dir}/test_1/test" && "{test_files_dir}/test_1/test"'
+def test_func(user_codes_dir, test_files_dir, test_id):
+    command = f'gcc "{user_codes_dir}/calculator.c" "{test_files_dir}/test-{test_id}/0-test_calculator.c" -o "{test_files_dir}/test-{test_id}/test" && "{test_files_dir}/test-{test_id}/test"'
     result = subprocess.run(
         command, shell=True, capture_output=True, text=True
     )
@@ -13,6 +13,7 @@ def test_1(user_codes_dir, test_files_dir):
 
     if exit_code == 0:
         result = {
+            "id": test_id,
             "status": "pass",
             "message": "Test passed"
         }
@@ -33,6 +34,7 @@ def test_1(user_codes_dir, test_files_dir):
         {len(expected_stderr)} chars long
         """
         result = {
+            "id": test_id,
             "status": "fail",
             "message": fail_reason,
         }
