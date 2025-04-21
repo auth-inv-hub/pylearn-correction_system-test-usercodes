@@ -1,7 +1,7 @@
 import subprocess
 
-def test_func(user_codes_dir, test_files_dir, test_id):
-    command = f'[ -f "{user_codes_dir}/README.md" ] || exit 1'
+def test_func(user_codes_dir, test_files_dir, project_dir, task_id, test_id):
+    command = f'[ -f "{user_codes_dir}/{project_dir}/README.md" ] || exit 1'
     result = subprocess.run(
         command, shell=True, capture_output=True, text=True
     )
@@ -14,7 +14,7 @@ def test_func(user_codes_dir, test_files_dir, test_id):
     if exit_code == 0:
         result = {
             "id": test_id,
-            "status": "pass",
+            "status": "passed",
             "message": "Test passed"
         }
         return result
@@ -35,7 +35,7 @@ def test_func(user_codes_dir, test_files_dir, test_id):
         """
         result = {
             "id": test_id,
-            "status": "fail",
+            "status": "failed",
             "message": fail_reason,
         }
         return result
